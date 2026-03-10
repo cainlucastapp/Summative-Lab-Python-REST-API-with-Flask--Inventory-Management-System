@@ -1,4 +1,4 @@
-# lib/models/inventory.py
+# models/inventory.py
 
 class Inventory:
     def __init__(self, id, barcode, product_name, brands, ingredients_text, categories, nutrition_grades, price=0, stock=0):
