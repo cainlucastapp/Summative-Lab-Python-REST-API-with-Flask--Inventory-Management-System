@@ -2,7 +2,7 @@
 
 # Requires
 import pytest
-from lib.models.inventory import Inventory
+from models.inventory import Inventory
 
 
 #Fixtures
