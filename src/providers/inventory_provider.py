@@ -4,7 +4,7 @@
 # Requires
 from flask import jsonify, request, current_app
 import requests
-from models.inventory import Inventory
+from src.models.inventory import Inventory
 
 
 # Seed data

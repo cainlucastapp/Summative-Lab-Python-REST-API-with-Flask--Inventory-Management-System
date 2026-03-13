@@ -3,7 +3,7 @@
 
 # Requires
 from flask import Flask, render_template
-from controllers.inventory_controller import get_all, get_one, create, update, delete, search, lookup_product, import_product
+from src.providers.inventory_provider import get_all, get_one, create, update, delete, search, lookup_product, import_product
 
 
 # Initialize app

@@ -5,7 +5,7 @@
 import pytest
 from unittest.mock import patch
 from app import app
-import controllers.inventory_controller as ctrl
+import src.providers.inventory_provider as ctrl
 
 
 #Fixtures
@@ -126,7 +126,7 @@ def test_lookup_barcode(client):
         "categories": "Sodas",
         "nutrition_grades": "e"
     }
-    with patch('controllers.inventory_controller.fetch_from_api', return_value=(mock_product, "049000028911")):
+    with patch('src.providers.inventory_provider.fetch_from_api', return_value=(mock_product, "049000028911")):
         response = client.get('/inventory/lookup?barcode=049000028911')
         assert response.status_code == 200
         assert response.get_json()['product_name'] == "Coca-Cola"
@@ -134,7 +134,7 @@ def test_lookup_barcode(client):
 
 # GET /inventory/lookup returns 404 for unknown barcode
 def test_lookup_barcode_not_found(client):
-    with patch('controllers.inventory_controller.fetch_from_api', return_value=(None, None)):
+    with patch('src.providers.inventory_provider.fetch_from_api', return_value=(None, None)):
         response = client.get('/inventory/lookup?barcode=000000000000')
         assert response.status_code == 404
 
@@ -148,7 +148,7 @@ def test_lookup_name(client):
         "categories": "Breakfast Cereals",
         "nutrition_grades": "b"
     }
-    with patch('controllers.inventory_controller.fetch_from_api', return_value=(mock_product, "016000275607")):
+    with patch('src.providers.inventory_provider.fetch_from_api', return_value=(mock_product, "016000275607")):
         response = client.get('/inventory/lookup?name=cheerios')
         assert response.status_code == 200
         assert response.get_json()['product_name'] == "Cheerios"
@@ -156,7 +156,7 @@ def test_lookup_name(client):
 
 # GET /inventory/lookup returns 504 on timeout
 def test_lookup_name_timeout(client):
-    with patch('controllers.inventory_controller.fetch_from_api', return_value=(None, "timeout")):
+    with patch('src.providers.inventory_provider.fetch_from_api', return_value=(None, "timeout")):
         response = client.get('/inventory/lookup?name=cheerios')
         assert response.status_code == 504
 
@@ -176,7 +176,7 @@ def test_import_product(client):
         "categories": "Breakfast Cereals",
         "nutrition_grades": "b"
     }
-    with patch('controllers.inventory_controller.fetch_from_api', return_value=(mock_product, "016000275607")):
+    with patch('src.providers.inventory_provider.fetch_from_api', return_value=(mock_product, "016000275607")):
         response = client.post('/inventory/import', json={"name": "cheerios", "price": 4.49, "stock": 30})
         assert response.status_code == 201
         assert response.get_json()['product_name'] == "Cheerios"
