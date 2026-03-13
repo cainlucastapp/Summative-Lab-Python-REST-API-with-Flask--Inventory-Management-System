@@ -1,4 +1,4 @@
-# controllers/inventory_controller.py
+# src/providers/inventory_provider.py
 
 
 # Requires
@@ -110,8 +110,6 @@ def search():
                query in i.brands.lower() or
                query in i.categories.lower()]
     return jsonify(results), 200
-
-
 
 
 # Fetch from OpenFoodFacts by barcode or name

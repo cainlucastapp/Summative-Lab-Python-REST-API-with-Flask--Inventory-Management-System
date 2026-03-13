@@ -4,7 +4,7 @@
 # Requires
 import pytest
 from unittest.mock import patch
-from app import app
+from src.app import app
 import src.providers.inventory_provider as ctrl
 
 
