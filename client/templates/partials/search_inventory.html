@@ -1,0 +1,7 @@
+<section id="search-inventory" class="section">
+    <h2>Search</h2>
+    <input type="text" id="search-input" placeholder="Search by name, brand or category">
+    <button onclick="searchInventory()">Search</button>
+    {% set tbody_id = 'search-results' %}
+    {% include 'partials/inventory_table.html' %}
+</section>

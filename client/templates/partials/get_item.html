@@ -1,0 +1,24 @@
+<section id="get-item" class="section">
+    <h2>Get Item</h2>
+    <input type="text" id="lookup-input" placeholder="Barcode or product name">
+    <button onclick="lookupItem()">Search API</button>
+    <div id="lookup-result">
+        <table id="lookup-table" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Categories</th>
+                    <th>Nutrition Grade</th>
+                </tr>
+            </thead>
+            <tbody id="lookup-list"></tbody>
+        </table>
+        <div id="lookup-import" style="display:none;">
+            <input type="number" id="lookup-price" placeholder="Price">
+            <input type="number" id="lookup-stock" placeholder="Stock">
+            <button onclick="importItem()">Add to Inventory</button>
+        </div>
+        <p id="lookup-message"></p>
+    </div>
+</section>
