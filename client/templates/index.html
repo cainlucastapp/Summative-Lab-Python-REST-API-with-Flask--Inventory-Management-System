@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management System</title>
+    <title>Food Inventory Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <img src="{{ url_for('static', filename='images/food_inventory_manager.png') }}">
+
+    <header>
+        <img src="{{ url_for('static', filename='images/food_inventory_manager.png') }}" alt="Food Inventory Manager">
+    </header>
+
+    <nav>
+        <button onclick="showSection('view-inventory')">View All</button>
+        <button onclick="showSection('search-inventory')">Search</button>
+        <button onclick="showSection('add-item')">Add Item</button>
+        <button onclick="showSection('get-item')">Get Item</button>
+    </nav>
+
+    {% include 'partials/view_inventory.html' %}
+    {% include 'partials/search_inventory.html' %}
+    {% include 'partials/add_item.html' %}
+    {% include 'partials/get_item.html' %}
+    {% include 'partials/item_detail.html' %}
+
     <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
