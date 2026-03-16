@@ -66,7 +66,8 @@ function addItem() {
         ingredients_text: document.getElementById('add-ingredients').value,
         nutrition_grades: document.getElementById('add-grades').value,
         price: parseFloat(document.getElementById('add-price').value),
-        stock: parseInt(document.getElementById('add-stock').value)
+        stock: parseInt(document.getElementById('add-stock').value),
+        image_url: document.getElementById('add-image-url').value
     }
     fetch('/inventory', {
         method: 'POST',
@@ -147,7 +148,8 @@ function showDetail(id) {
             document.getElementById('detail-grades').textContent = item.nutrition_grades
             document.getElementById('detail-price').textContent = item.price
             document.getElementById('detail-stock').textContent = item.stock
-            document.getElementById('item-detail').style.display = 'block'
+            const img = document.getElementById('detail-image')
+            img.src = item.image_url || '/static/images/image_not_found.png'
             document.getElementById('item-detail-overlay').style.display = 'flex'
         })
 }
@@ -170,8 +172,12 @@ function lookupItem() {
                 document.getElementById('lookup-message').textContent = data.error
                 document.getElementById('lookup-table').style.display = 'none'
                 document.getElementById('lookup-import').style.display = 'none'
+                document.getElementById('lookup-image').style.display = 'none'
             } else {
                 document.getElementById('lookup-message').textContent = ''
+                const img = document.getElementById('lookup-image')
+                img.src = data.image_url || '/static/images/image_not_found.png'
+                img.style.display = 'block'
                 const tbody = document.getElementById('lookup-list')
                 tbody.innerHTML = `
                     <tr>
@@ -208,6 +214,7 @@ function importItem() {
             document.getElementById('lookup-table').style.display = 'none'
             document.getElementById('lookup-import').style.display = 'none'
             document.getElementById('lookup-input').value = ''
+            document.getElementById('lookup-image').style.display = 'none'
         }
     })
 }
@@ -223,4 +230,5 @@ function clearAddForm() {
     document.getElementById('add-grades').value = ''
     document.getElementById('add-price').value = ''
     document.getElementById('add-stock').value = ''
+    document.getElementById('add-image-url').value = ''
 }
