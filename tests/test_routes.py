@@ -167,27 +167,6 @@ def test_lookup_no_params(client):
     assert response.status_code == 400
 
 
-# POST /inventory/import adds product from API and returns 201
-def test_import_product(client):
-    mock_product = {
-        "product_name": "Cheerios",
-        "brands": ["General Mills"],
-        "ingredients_text": "Whole grain oats",
-        "categories": "Breakfast Cereals",
-        "nutrition_grades": "b"
-    }
-    with patch('src.providers.inventory_provider.fetch_from_api', return_value=(mock_product, "016000275607")):
-        response = client.post('/inventory/import', json={"name": "cheerios", "price": 4.49, "stock": 30})
-        assert response.status_code == 201
-        assert response.get_json()['product_name'] == "Cheerios"
-
-
-# POST /inventory/import returns 400 with no name or barcode
-def test_import_missing_body(client):
-    response = client.post('/inventory/import', json={})
-    assert response.status_code == 400
-
-
 # GET /inventory returns empty list when inventory is empty
 def test_get_all_empty(client):
     ctrl.inventory = []

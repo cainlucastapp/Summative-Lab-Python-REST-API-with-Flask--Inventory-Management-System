@@ -5,7 +5,7 @@
 from flask import jsonify, request
 from src.providers.inventory_provider import (
     all_items, one_item, add_item, update_item, remove_item,
-    search_items, lookup_from_api, import_from_api
+    search_items, lookup_from_api
 )
 
 
@@ -66,26 +66,3 @@ def lookup_product():
     if not product:
         return jsonify({"error": "Product not found on OpenFoodFacts"}), 404
     return jsonify(product), 200
-
-
-# Import product from OpenFoodFacts
-def import_product():
-    body = request.get_json(silent=True) or {}
-    barcode = body.get('barcode')
-    name = body.get('name')
-    if not barcode and not name:
-        return jsonify({"error": "Request body must include 'barcode' or 'name'"}), 400
-    try:
-        item, code = import_from_api(
-            barcode=barcode,
-            name=name,
-            price=body.get("price", 0),
-            stock=body.get("stock", 0)
-        )
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-    if code == "timeout":
-        return jsonify({"error": "OpenFoodFacts request timed out, please try again"}), 504
-    if not item:
-        return jsonify({"error": "Product not found on OpenFoodFacts"}), 404
-    return jsonify(item), 201

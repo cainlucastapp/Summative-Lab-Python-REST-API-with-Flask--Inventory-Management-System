@@ -147,24 +147,3 @@ def lookup_from_api(barcode=None, name=None):
         "nutrition_grades": normalize_field(product.get("nutrition_grades")),
         "image_url": normalize_field(product.get("image_front_url"))
     }, code
-
-
-# Import product from API into inventory
-def import_from_api(barcode=None, name=None, price=0, stock=0):
-    product, code = fetch_from_api(barcode=barcode) if barcode else fetch_from_api(name=name)
-    if not product:
-        return None, code
-    new_item = Inventory(
-        id=get_next_id(),
-        barcode=code,
-        product_name=normalize_field(product.get("product_name")),
-        brands=normalize_field(product.get("brands")),
-        ingredients_text=normalize_field(product.get("ingredients_text")),
-        categories=normalize_field(product.get("categories")),
-        nutrition_grades=normalize_field(product.get("nutrition_grades")),
-        image_url=normalize_field(product.get("image_front_url")),
-        price=price,
-        stock=stock
-    )
-    inventory.append(new_item)
-    return new_item.to_dict(), code

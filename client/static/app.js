@@ -190,6 +190,7 @@ function lookupItem() {
                 document.getElementById('lookup-table').style.display = 'table'
                 document.getElementById('lookup-import').style.display = 'block'
                 document.getElementById('lookup-input').dataset.barcode = data.barcode
+                document.getElementById('lookup-input').dataset.product = JSON.stringify(data)
             }
         })
 }
@@ -197,13 +198,23 @@ function lookupItem() {
 
 // Import item from API into inventory
 function importItem() {
-    const barcode = document.getElementById('lookup-input').dataset.barcode
+    const product = JSON.parse(document.getElementById('lookup-input').dataset.product)
     const price = parseFloat(document.getElementById('lookup-price').value)
     const stock = parseInt(document.getElementById('lookup-stock').value)
-    fetch('/inventory/import', {
+    fetch('/inventory', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ barcode, price, stock })
+        body: JSON.stringify({
+            barcode: product.barcode,
+            product_name: product.product_name,
+            brands: product.brands,
+            ingredients_text: product.ingredients_text,
+            categories: product.categories,
+            nutrition_grades: product.nutrition_grades,
+            image_url: product.image_url,
+            price: price,
+            stock: stock
+        })
     })
     .then(res => res.json())
     .then(data => {
@@ -213,8 +224,8 @@ function importItem() {
             document.getElementById('lookup-message').textContent = `${data.product_name} added to inventory`
             document.getElementById('lookup-table').style.display = 'none'
             document.getElementById('lookup-import').style.display = 'none'
-            document.getElementById('lookup-input').value = ''
             document.getElementById('lookup-image').style.display = 'none'
+            document.getElementById('lookup-input').value = ''
         }
     })
 }
