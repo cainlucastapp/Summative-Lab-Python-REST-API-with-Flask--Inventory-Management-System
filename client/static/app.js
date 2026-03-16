@@ -131,7 +131,14 @@ function deleteItem(id) {
         method: 'DELETE'
     })
     .then(res => res.json())
-    .then(() => loadInventory())
+    .then(() => {
+        const searchSection = document.getElementById('search-inventory')
+        if (searchSection.style.display === 'block') {
+            searchInventory()
+        } else {
+            loadInventory()
+        }
+    })
 }
 
 
