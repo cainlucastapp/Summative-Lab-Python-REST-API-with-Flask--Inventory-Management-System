@@ -37,7 +37,7 @@ def test_inventory_instantiation(sample_item):
 # Inventory to_dict structure
 def test_to_dict_returns_correct_structure(sample_item):
     result = sample_item.to_dict()
-    expected_keys = {"id", "barcode", "product_name", "brands", "ingredients_text", "categories", "nutrition_grades", "price", "stock"}
+    expected_keys = {"id", "barcode", "product_name", "brands", "ingredients_text", "categories", "nutrition_grades", "price", "stock", "image_url"}
     assert set(result.keys()) == expected_keys
 
 
