@@ -9,15 +9,23 @@ from src.models.inventory import Inventory
 
 # Seed data
 inventory = [
-    Inventory(id=1, barcode="012345678905", product_name="Organic Almond Milk", brands="Silk",
-              ingredients_text="Filtered water, almonds, cane sugar", categories="Plant-based milks",
-              nutrition_grades="a", price=3.99, stock=10),
-    Inventory(id=2, barcode="049000028911", product_name="Coca-Cola", brands="Coca-Cola",
-              ingredients_text="Carbonated water, high fructose corn syrup, caramel color, phosphoric acid",
-              categories="Sodas", nutrition_grades="e", price=1.99, stock=50),
-    Inventory(id=3, barcode="016000275607", product_name="Cheerios", brands="General Mills",
-              ingredients_text="Whole grain oats, modified corn starch, sugar, salt",
-              categories="Breakfast Cereals", nutrition_grades="b", price=4.49, stock=30),
+    Inventory(id=1, barcode="025293001497", product_name="Almondmilk", brands="Silk",
+              ingredients_text="ORGANIC LOW FAT MILK, VITAMIN A PALMITATE, VITAMIN D3",
+              categories="en:milk", nutrition_grades="b",
+              image_url="https://images.openfoodfacts.org/images/products/002/529/300/1497/front_en.111.400.jpg",
+              price=3.99, stock=10),
+    Inventory(id=2, barcode="04963406", product_name="Coke Original Taste", brands="Coke",
+              ingredients_text="carbonated water, high fructose corn syrup, caramel color, phosphoric acid, natural flavors, caffeine",
+              categories="Beverages and beverages preparations,Beverages,Carbonated drinks,Sodas,Colas,Sweetened beverages",
+              nutrition_grades="e",
+              image_url="https://images.openfoodfacts.org/images/products/000/000/496/3406/front_en.185.400.jpg",
+              price=1.99, stock=50),
+    Inventory(id=3, barcode="065633132818", product_name="Plain Cheerios", brands="General Mills",
+              ingredients_text="WHOLE GRAIN _OATS_, CORN STARCH, SUGAR, SALT, TRISODIUM PHOSPHATE, CALCIUM CARBONATE, MONOGLYCERIDES, TOCOPHEROLS\r\n\r\nVITAMINS & MINERALS: IRON, NIACINAMIDE (VITAMIN B3), CALCIUM PANTOTHENATE (VITAMIN B5), PYRIDOXINE HYDROCHLORIDE (VITAMIN B6), FOLATE.",
+              categories="Plant-based foods and beverages, Plant-based foods, Breakfasts, Cereals and potatoes, Seeds, Cereals and their products, Breakfast cereals, Cereal grains, Extruded cereals",
+              nutrition_grades="c",
+              image_url="https://images.openfoodfacts.org/images/products/006/563/313/2818/front_en.41.400.jpg",
+              price=4.49, stock=30),
 ]
 
 
@@ -52,7 +60,7 @@ def fetch_from_api(barcode=None, name=None):
         response = requests.get(search_url, params={
             "q": name,
             "page_size": 1,
-            "fields": "code,product_name,brands,ingredients_text,categories,nutrition_grades"
+            "fields": "code,product_name,brands,ingredients_text,categories,nutrition_grades,image_front_url"
         }, timeout=15)
         data = response.json()
         hits = data.get("hits", [])
@@ -136,7 +144,8 @@ def lookup_from_api(barcode=None, name=None):
         "brands": normalize_field(product.get("brands")),
         "ingredients_text": normalize_field(product.get("ingredients_text")),
         "categories": normalize_field(product.get("categories")),
-        "nutrition_grades": normalize_field(product.get("nutrition_grades"))
+        "nutrition_grades": normalize_field(product.get("nutrition_grades")),
+        "image_url": normalize_field(product.get("image_front_url"))
     }, code
 
 
@@ -153,6 +162,7 @@ def import_from_api(barcode=None, name=None, price=0, stock=0):
         ingredients_text=normalize_field(product.get("ingredients_text")),
         categories=normalize_field(product.get("categories")),
         nutrition_grades=normalize_field(product.get("nutrition_grades")),
+        image_url=normalize_field(product.get("image_front_url")),
         price=price,
         stock=stock
     )
