@@ -3,7 +3,7 @@
 
 # Requires
 from flask import Flask, render_template
-from src.controllers.inventory_controller import get_all, get_one, create, update, delete, search, lookup_product, import_product
+from src.controllers.inventory_controller import get_all, get_one, create, update, delete, search, lookup_product
 
 
 # Initialize app
@@ -60,12 +60,6 @@ def search_inventory():
 @app.route('/inventory/lookup', methods=['GET'])
 def lookup_from_api():
     return lookup_product()
-
-
-# POST /inventory/import - Import product from OpenFoodFacts (by product name or barcode)
-@app.route('/inventory/import', methods=['POST'])
-def import_from_api():
-    return import_product()
 
 
 if __name__ == "__main__":
