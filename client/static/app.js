@@ -44,7 +44,7 @@ function renderTable(items, tbodyId) {
             <td>${item.id}</td>
             <td><a href="#" onclick="event.preventDefault(); showDetail(${item.id})">${item.product_name}</a></td>
             <td>${item.brands}</td>
-            <td>${item.price}</td>
+            <td>$${parseFloat(item.price).toFixed(2)}</td>
             <td>${item.stock}</td>
             <td>
                 <button onclick="editItem(${item.id})">✏️</button>
@@ -146,7 +146,7 @@ function showDetail(id) {
             document.getElementById('detail-categories').textContent = item.categories
             document.getElementById('detail-ingredients').textContent = item.ingredients_text
             document.getElementById('detail-grades').textContent = item.nutrition_grades
-            document.getElementById('detail-price').textContent = item.price
+            document.getElementById('detail-price').textContent = `$${parseFloat(item.price).toFixed(2)}`
             document.getElementById('detail-stock').textContent = item.stock
             const img = document.getElementById('detail-image')
             img.src = item.image_url || '/static/images/image_not_found.png'
