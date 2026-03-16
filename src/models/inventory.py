@@ -2,7 +2,7 @@
 
 
 class Inventory:
-    def __init__(self, id, barcode, product_name, brands, ingredients_text, categories, nutrition_grades, price=0, stock=0):
+    def __init__(self, id, barcode, product_name, brands, ingredients_text, categories, nutrition_grades, price=0, stock=0, image_url=""):
         self.id = id
         self.barcode = barcode
         self.product_name = product_name
@@ -12,6 +12,7 @@ class Inventory:
         self.nutrition_grades = nutrition_grades
         self.price = price
         self.stock = stock
+        self.image_url = image_url
 
     # ID
     @property
@@ -121,6 +122,18 @@ class Inventory:
         self._stock = value
 
 
+    # Image URL
+    @property
+    def image_url(self):
+        return self._image_url
+
+    @image_url.setter
+    def image_url(self, value):
+        if not isinstance(value, str):
+            raise ValueError("image_url must be a string")
+        self._image_url = value
+
+
     # Convert to dictionary for JSON serialization
     def to_dict(self):
         return {
@@ -132,5 +145,6 @@ class Inventory:
             "categories": self.categories,
             "nutrition_grades": self.nutrition_grades,
             "price": self.price,
-            "stock": self.stock
+            "stock": self.stock,
+            "image_url": self.image_url
         }
