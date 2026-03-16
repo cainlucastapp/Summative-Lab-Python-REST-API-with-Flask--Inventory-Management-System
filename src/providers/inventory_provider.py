@@ -93,7 +93,8 @@ def add_item(data):
         categories=data.get("categories", ""),
         nutrition_grades=data.get("nutrition_grades", ""),
         price=data.get("price", 0),
-        stock=data.get("stock", 0)
+        stock=data.get("stock", 0),
+        image_url=data.get("image_url", "")
     )
     inventory.append(new_item)
     return new_item.to_dict()
