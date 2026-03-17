@@ -89,6 +89,13 @@ nav button:hover, nav button.active {
     display: inline-block;
 }
 
+.section h3 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--green);
+    margin-bottom: 1rem;
+}   
+
 
 /* Tables */
 .table-wrapper {
@@ -300,6 +307,41 @@ tbody td span:hover { color: var(--orange); }
     display: block;
     margin: 0 auto 1.25rem;
     padding: 0.5rem;
+}
+
+#item-detail input {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 1.5px solid var(--cream);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    color: #000;
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#item-detail input:focus {
+    border-color: var(--orange);
+}
+
+#item-detail textarea {
+    width: 100%;
+    padding: 0.4rem 0.75rem;
+    border: 1.5px solid var(--cream);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    background: var(--white);
+    color: #000;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+}
+
+#item-detail textarea:focus {
+    border-color: var(--orange);
 }
 
 

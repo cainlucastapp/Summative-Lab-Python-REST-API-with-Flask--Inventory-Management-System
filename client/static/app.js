@@ -148,17 +148,48 @@ function showDetail(id) {
         .then(res => res.json())
         .then(item => {
             document.getElementById('detail-name').textContent = item.product_name
-            document.getElementById('detail-barcode').textContent = item.barcode
-            document.getElementById('detail-brand').textContent = item.brands
-            document.getElementById('detail-categories').textContent = item.categories
-            document.getElementById('detail-ingredients').textContent = item.ingredients_text
-            document.getElementById('detail-grades').textContent = item.nutrition_grades
-            document.getElementById('detail-price').textContent = `$${parseFloat(item.price).toFixed(2)}`
-            document.getElementById('detail-stock').textContent = item.stock
+            document.getElementById('detail-barcode').value = item.barcode
+            document.getElementById('detail-product-name').value = item.product_name
+            document.getElementById('detail-brand').value = item.brands
+            document.getElementById('detail-categories').value = item.categories
+            document.getElementById('detail-ingredients').value = item.ingredients_text
+            document.getElementById('detail-grades').value = item.nutrition_grades
+            document.getElementById('detail-price').value = item.price
+            document.getElementById('detail-stock').value = item.stock
+            document.getElementById('detail-image-url').value = item.image_url
             const img = document.getElementById('detail-image')
             img.src = item.image_url || '/static/images/image_not_found.png'
+            document.getElementById('item-detail-overlay').dataset.id = item.id
             document.getElementById('item-detail-overlay').style.display = 'flex'
         })
+}
+
+
+// Save item detail
+function saveDetail() {
+    const id = document.getElementById('item-detail-overlay').dataset.id
+    const item = {
+        barcode: document.getElementById('detail-barcode').value,
+        product_name: document.getElementById('detail-product-name').value,
+        brands: document.getElementById('detail-brand').value,
+        categories: document.getElementById('detail-categories').value,
+        ingredients_text: document.getElementById('detail-ingredients').value,
+        nutrition_grades: document.getElementById('detail-grades').value,
+        price: parseFloat(document.getElementById('detail-price').value),
+        stock: parseInt(document.getElementById('detail-stock').value),
+        image_url: document.getElementById('detail-image-url').value
+    }
+    fetch(`/inventory/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) return
+        closeDetail()
+        loadInventory()
+    })
 }
 
 
