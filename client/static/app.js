@@ -212,9 +212,14 @@ function closeDetail() {
 function lookupItem() {
     const query = document.getElementById('lookup-input').value
     const param = isNaN(query) ? `name=${query}` : `barcode=${query}`
+    document.getElementById('lookup-loading').style.display = 'block'
+    document.getElementById('lookup-table').style.display = 'none'
+    document.getElementById('lookup-import').style.display = 'none'
+    document.getElementById('lookup-image').style.display = 'none'
     fetch(`/inventory/lookup?${param}`)
         .then(res => res.json())
         .then(data => {
+            document.getElementById('lookup-loading').style.display = 'none'
             if (data.error) {
                 document.getElementById('lookup-message').textContent = data.error
                 document.getElementById('lookup-table').style.display = 'none'
