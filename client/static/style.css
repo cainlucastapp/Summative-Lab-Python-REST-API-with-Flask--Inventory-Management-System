@@ -1,29 +1,317 @@
-/* static/style.css */
+/* style.css */
 
 
+/* Variables */
+:root {
+    --green: #2d6a1f;
+    --orange: #e87722;
+    --cream: #f5e6c8;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 8px rgba(45, 106, 31, 0.12);
+    --radius: 12px;
+}
+
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--cream);
+    color: #000;
+    min-height: 100vh;
+}
+
+
+/* Banner */
+header img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 280px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+
+/* Nav */
+nav {
+    background: var(--green);
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav button {
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.55rem 1.4rem;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+nav button:hover, nav button.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(232, 119, 34, 0.4);
+}
+
+
+/* Section */
+.section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.section h2 {
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--green);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--orange);
+    display: inline-block;
+}
+
+
+/* Tables */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    font-size: 0.95rem;
+}
+
+thead {
+    background: var(--green);
+    color: var(--white);
+}
+
+thead th {
+    font-weight: 700;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--cream); }
+
+tbody td {
+    padding: 0.8rem 1rem;
+    vertical-align: middle;
+}
+
+tbody td span {
+    color: var(--green);
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+tbody td span:hover { color: var(--orange); }
+
+
+/* Action buttons */
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.3rem 0.4rem;
+    border-radius: 8px;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn-icon:hover {
+    transform: scale(1.2);
+    background: var(--cream);
+}
+
+
+/* Forms */
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.form-group input, .search-bar input, #lookup-import input {
+    padding: 0.7rem 1rem;
+    border: 1.5px solid var(--cream);
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-family: sans-serif;
+    background: var(--white);
+    color: #000;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+}
+
+.form-group input:focus, .search-bar input:focus, #lookup-import input:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(232, 119, 34, 0.15);
+}
+
+.form-group input::placeholder, .search-bar input::placeholder, #lookup-import input::placeholder {
+    color: #888;
+}
+
+.form-group input.full-width { grid-column: 1 / -1; }
+
+
+/* Buttons */
+.btn {
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.6rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary { background: var(--green); color: var(--white); }
+.btn-orange { background: var(--orange); color: var(--white); }
+
+.btn-primary:hover { background: var(--orange); }
+.btn-orange:hover { background: #d46a1a; }
+
+.btn-primary:hover, .btn-orange:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.search-bar input { flex: 1; min-width: 200px; }
+
+
+/* Product images */
+#lookup-image {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem;
+    padding: 0.5rem;
+}
+
+
+/* Import section */
+#lookup-import {
+    padding: 1rem 0;
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+#lookup-import input { width: 140px; }
+
+
+/* Modal overlay */
 #item-detail-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(26, 46, 20, 0.6);
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
+    padding: 1rem;
 }
 
 #item-detail {
-    background: white;
+    background: var(--white);
+    border-radius: var(--radius);
     padding: 2rem;
-    border-radius: 8px;
-    min-width: 400px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 40px rgba(45, 106, 31, 0.24);
+}
+
+#item-detail h3 {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--green);
+    margin-bottom: 1rem;
+}
+
+#item-detail p {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--cream);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+#item-detail p:last-of-type { border-bottom: none; }
+
+#item-detail p strong {
+    color: var(--green);
+    font-weight: 700;
+    margin-right: 0.4rem;
 }
 
 #detail-image {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     object-fit: contain;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 1.25rem;
+    padding: 0.5rem;
+}
+
+
+/* Responsive */
+@media (max-width: 600px) {
+    .form-group { grid-template-columns: 1fr; }
+    .form-group input.full-width { grid-column: 1; }
+    nav button { font-size: 0.85rem; padding: 0.45rem 1rem; }
+    .section h2 { font-size: 1.3rem; }
+    #item-detail { padding: 1.25rem; }
+    thead th { font-size: 0.8rem; padding: 0.65rem 0.75rem; }
+    tbody td { padding: 0.65rem 0.75rem; font-size: 0.88rem; }
+    #lookup-import { flex-direction: column; align-items: stretch; }
+    #lookup-import input { width: 100%; }
 }
