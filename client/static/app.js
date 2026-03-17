@@ -48,7 +48,7 @@ function renderTable(items, tbodyId) {
             <td>${item.stock}</td>
             <td>
                 <button onclick="editItem(${item.id})">✏️</button>
-                <button onclick="deleteItem(${item.id})">🗑️</button>
+                <button onclick="confirmDelete(${item.id}, this)">🗑️</button>
             </td>
         `
         tbody.appendChild(row)
@@ -124,6 +124,15 @@ function saveItem(id) {
     .then(() => loadInventory())
 }
 
+
+// Confirm delete inventory item
+function confirmDelete(id, btn) {
+    const td = btn.closest('td')
+    td.innerHTML = `
+        <button class="btn btn-red" onclick="deleteItem(${id})">DELETE</button>
+        <button class="btn btn-primary" onclick="loadInventory()">CANCEL</button>
+    `
+}
 
 // Delete inventory item
 function deleteItem(id) {

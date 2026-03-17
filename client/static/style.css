@@ -206,6 +206,7 @@ tbody td span:hover { color: var(--orange); }
 
 .btn-primary { background: var(--green); color: var(--white); }
 .btn-orange { background: var(--orange); color: var(--white); }
+.btn-red { background: #c0392b; color: var(--white); }
 
 .btn-primary:hover { background: var(--orange); }
 .btn-orange:hover { background: #d46a1a; }
