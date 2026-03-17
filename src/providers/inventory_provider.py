@@ -5,28 +5,30 @@
 from flask import current_app
 import requests
 from src.models.inventory import Inventory
+import os
+import json
 
 
-# Seed data
-inventory = [
-    Inventory(id=1, barcode="025293001497", product_name="Almondmilk", brands="Silk",
-              ingredients_text="ORGANIC LOW FAT MILK, VITAMIN A PALMITATE, VITAMIN D3",
-              categories="en:milk", nutrition_grades="b",
-              image_url="https://images.openfoodfacts.org/images/products/002/529/300/1497/front_en.111.400.jpg",
-              price=3.99, stock=10),
-    Inventory(id=2, barcode="04963406", product_name="Coke Original Taste", brands="Coke",
-              ingredients_text="carbonated water, high fructose corn syrup, caramel color, phosphoric acid, natural flavors, caffeine",
-              categories="Beverages and beverages preparations,Beverages,Carbonated drinks,Sodas,Colas,Sweetened beverages",
-              nutrition_grades="e",
-              image_url="https://images.openfoodfacts.org/images/products/000/000/496/3406/front_en.185.400.jpg",
-              price=1.99, stock=50),
-    Inventory(id=3, barcode="065633132818", product_name="Plain Cheerios", brands="General Mills",
-              ingredients_text="WHOLE GRAIN _OATS_, CORN STARCH, SUGAR, SALT, TRISODIUM PHOSPHATE, CALCIUM CARBONATE, MONOGLYCERIDES, TOCOPHEROLS\r\n\r\nVITAMINS & MINERALS: IRON, NIACINAMIDE (VITAMIN B3), CALCIUM PANTOTHENATE (VITAMIN B5), PYRIDOXINE HYDROCHLORIDE (VITAMIN B6), FOLATE.",
-              categories="Plant-based foods and beverages, Plant-based foods, Breakfasts, Cereals and potatoes, Seeds, Cereals and their products, Breakfast cereals, Cereal grains, Extruded cereals",
-              nutrition_grades="c",
-              image_url="https://images.openfoodfacts.org/images/products/006/563/313/2818/front_en.41.400.jpg",
-              price=4.49, stock=30),
-]
+# In-memory inventory list
+DATA_FILE = "data/inventory.json"
+inventory = []
+
+
+# Load inventory from JSON file
+def load():
+    global inventory
+    if not os.path.exists(DATA_FILE):
+        return
+    with open(DATA_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        inventory = [Inventory.from_dict(item) for item in data]
+
+
+# Save inventory to JSON file
+def save():
+    data = [item.to_dict() for item in inventory]
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
 
 
 # Find item by ID
@@ -73,17 +75,20 @@ def fetch_from_api(barcode=None, name=None):
 
 # Return all items as list of dicts
 def all_items():
+    load()
     return [item.to_dict() for item in inventory]
 
 
 # Return single item dict or None
 def one_item(id):
+    load()
     item = find_item(id)
     return item.to_dict() if item else None
 
 
 # Add new item, returns item dict or raises ValueError
 def add_item(data):
+    load()
     new_item = Inventory(
         id=get_next_id(),
         barcode=data.get("barcode", ""),
@@ -97,11 +102,13 @@ def add_item(data):
         image_url=data.get("image_url", "")
     )
     inventory.append(new_item)
+    save()
     return new_item.to_dict()
 
 
 # Update existing item, returns item dict or None
 def update_item(id, data):
+    load()
     item = find_item(id)
     if not item:
         return None
@@ -113,6 +120,7 @@ def update_item(id, data):
     if "nutrition_grades" in data: item.nutrition_grades = data["nutrition_grades"]
     if "price" in data: item.price = data["price"]
     if "stock" in data: item.stock = data["stock"]
+    save()
     return item.to_dict()
 
 
@@ -123,11 +131,13 @@ def remove_item(id):
     if not item:
         return False
     inventory = [i for i in inventory if i.id != id]
+    save()
     return True
 
 
 # Search items by query, returns list of dicts
 def search_items(query):
+    load()
     return [i.to_dict() for i in inventory if
             query in i.product_name.lower() or
             query in i.brands.lower() or
