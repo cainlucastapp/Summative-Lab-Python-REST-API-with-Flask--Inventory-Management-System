@@ -32,6 +32,12 @@ def reset_inventory():
     ]
 
 
+# GET / serves index page
+def test_index(client):
+    response = client.get('/')
+    assert response.status_code == 200
+    
+
 # GET /inventory returns 200 and all items
 def test_get_all(client):
     response = client.get('/inventory')
