@@ -137,3 +137,11 @@ def test_stock_negative_raises_value_error():
         Inventory(id=1, barcode="123", product_name="Test", brands="Brand",
                   ingredients_text="None", categories="Cat", nutrition_grades="b",
                   stock=-1)
+        
+
+# image_url invalid type raises ValueError
+def test_image_url_invalid_type_raises_value_error():
+    item = Inventory(id=1, barcode="123", product_name="Test", brands="Brand",
+                     ingredients_text="", categories="", nutrition_grades="")
+    with pytest.raises(ValueError):
+        item.image_url = 123
