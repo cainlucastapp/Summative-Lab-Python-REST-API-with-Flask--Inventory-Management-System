@@ -2,13 +2,18 @@
     <div id="item-detail">
         <img id="detail-image" src="" alt="Product Image">
         <h3 id="detail-name"></h3>
-        <p><strong>Barcode:</strong> <span id="detail-barcode"></span></p>
-        <p><strong>Brand:</strong> <span id="detail-brand"></span></p>
-        <p><strong>Categories:</strong> <span id="detail-categories"></span></p>
-        <p><strong>Ingredients:</strong> <span id="detail-ingredients"></span></p>
-        <p><strong>Nutrition Grade:</strong> <span id="detail-grades"></span></p>
-        <p><strong>Price:</strong> <span id="detail-price"></span></p>
-        <p><strong>Stock:</strong> <span id="detail-stock"></span></p>
-        <button class="btn btn-primary" onclick="closeDetail()">Close</button>
+        <p><strong>Barcode:</strong> <input id="detail-barcode" type="text"></p>
+        <p><strong>Name:</strong> <input id="detail-product-name" type="text"></p>
+        <p><strong>Brand:</strong> <input id="detail-brand" type="text"></p>
+        <p><strong>Categories:</strong> <textarea id="detail-categories" rows="5"></textarea></p>
+        <p><strong>Ingredients:</strong> <textarea id="detail-ingredients" rows="5"></textarea></p>
+        <p><strong>Nutrition Grade:</strong> <input id="detail-grades" type="text"></p>
+        <p><strong>Price:</strong> <input id="detail-price" type="number"></p>
+        <p><strong>Stock:</strong> <input id="detail-stock" type="number"></p>
+        <p><strong>Image URL:</strong> <input id="detail-image-url" type="text"></p>
+        <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+            <button class="btn btn-primary" onclick="saveDetail()">Save</button>
+            <button class="btn btn-orange" onclick="closeDetail()">Close</button>
+        </div>
     </div>
 </div>
