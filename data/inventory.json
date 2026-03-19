@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "barcode": "025293001497",
+    "product_name": "Almond Milk",
+    "brands": "Silk",
+    "ingredients_text": "ORGANIC LOW FAT MILK, VITAMIN A PALMITATE, VITAMIN D3",
+    "categories": "en:milk",
+    "nutrition_grades": "b",
+    "price": 3.99,
+    "stock": 10,
+    "image_url": "https://images.openfoodfacts.org/images/products/002/529/300/1497/front_en.111.400.jpg"
+  },
+  {
+    "id": 2,
+    "barcode": "04963406",
+    "product_name": "Coke Original Taste",
+    "brands": "Coke",
+    "ingredients_text": "carbonated water, high fructose corn syrup, caramel color, phosphoric acid, natural flavors, caffeine",
+    "categories": "Beverages and beverages preparations,Beverages,Carbonated drinks,Sodas,Colas,Sweetened beverages",
+    "nutrition_grades": "e",
+    "price": 1.99,
+    "stock": 50,
+    "image_url": "https://images.openfoodfacts.org/images/products/000/000/496/3406/front_en.185.400.jpg"
+  },
+  {
+    "id": 4,
+    "barcode": "87156836",
+    "product_name": "Pepsi Cola",
+    "brands": "Pepsi",
+    "ingredients_text": "",
+    "categories": "Beverages and beverages preparations, Beverages, Sweetened beverages, Alcoholvrije dranken, Cola's, Dranken, Frisdranken, Gesuikerde dranken, Koolzuurhoudende dranken, en:colas",
+    "nutrition_grades": "e",
+    "price": 1.99,
+    "stock": 50,
+    "image_url": "https://images.openfoodfacts.org/images/products/87156836/front_en.9.400.jpg"
+  },
+  {
+    "id": 5,
+    "barcode": "0016000275645",
+    "product_name": "Cheerios",
+    "brands": "Cheerios",
+    "ingredients_text": "",
+    "categories": "Plant-based foods and beverages, Plant-based foods, Breakfasts, Cereals and potatoes, Cereals and their products, Breakfast cereals",
+    "nutrition_grades": "unknown",
+    "price": 4.99,
+    "stock": 50,
+    "image_url": "https://images.openfoodfacts.org/images/products/001/600/027/5645/front.3.400.jpg"
+  }
+]

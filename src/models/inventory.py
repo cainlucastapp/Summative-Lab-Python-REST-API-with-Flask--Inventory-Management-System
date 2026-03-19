@@ -148,3 +148,20 @@ class Inventory:
             "stock": self.stock,
             "image_url": self.image_url
         }
+    
+
+    # Create instance from dictionary 
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            id=data.get("id"),
+            barcode=data.get("barcode", ""),
+            product_name=data.get("product_name", ""),
+            brands=data.get("brands", ""),
+            ingredients_text=data.get("ingredients_text", ""),
+            categories=data.get("categories", ""),
+            nutrition_grades=data.get("nutrition_grades", ""),
+            image_url=data.get("image_url", ""),
+            price=data.get("price", 0),
+            stock=data.get("stock", 0)
+        )
